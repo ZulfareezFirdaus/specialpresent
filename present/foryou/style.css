@@ -1,0 +1,652 @@
+/* CSS reset */
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+@import url('https://fonts.cdnfonts.com/css/birthday-2');
+
+html { font-size: 62.5%; 
+	overflow:hidden !important;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+  position: relative;
+}
+
+/* Typography =======================*/
+
+/* Headings */
+
+/* Main heading for card's front cover */
+.card-front__heading {
+       font-size: 79px;
+    text-align: right;
+    position: relative;
+    left: 75px;
+    top: -90px;
+    font-family: 'Birthday', sans-serif;
+}
+
+/* Main heading for inside page */
+.inside-page__heading { 
+  padding-bottom: 1rem; 
+  width: 100%;
+}
+
+/* Mixed */
+
+/* For both inside page's main heading and 'view me' text on card front cover */
+.inside-page__heading,
+.card-front__text-view {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-top: .2rem;
+}
+
+.inside-page__heading--city,
+.card-front__text-view--city { 
+
+color: #ff62b2;
+font-family: 'Birthday', sans-serif;
+  font-weight: 700;
+font-size:56px;  
+
+}
+
+.inside-page__heading--ski,
+.card-front__text-view--ski { color: #2aaac1; }
+
+.inside-page__heading--beach,
+.card-front__text-view--beach { color: #fa7f67; }
+
+.inside-page__heading--camping,
+.card-front__text-view--camping { color: #00b97c; }
+
+/* Front cover */
+
+.card-front__tp { color: #fafbfa; }
+
+/* For pricing text on card front cover */
+.card-front__text-price {
+  font-size: 1.2rem;
+  margin-top: -.2rem;
+}
+
+/* Back cover */
+
+/* For inside page's body text */
+.inside-page__text {
+  color: #333;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 600;
+}
+
+/* Icons ===========================================*/
+
+.card-front__icon {
+  fill: #fafbfa;
+  font-size: 3vw;
+  height: 3.25rem;
+  margin-top: -.5rem;
+  width: 3.25rem;
+}
+
+/* Buttons =================================================*/
+
+.inside-page__btn {
+  background-color: transparent;
+  border: 3px solid;
+  border-radius: .5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  overflow: hidden;
+  padding: .7rem .75rem;
+  position: relative;
+  text-decoration: none;
+  transition: all .3s ease;
+  width: 90%;
+  z-index: 10;
+}
+
+.inside-page__btn::before { 
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: scaleY(0);
+  transition: all .3s ease;
+  width: 100%;
+  z-index: -1;
+}
+
+.inside-page__btn--city { 
+  border-color: #ff40a1;
+  color: #ff40a1;
+}
+
+.inside-page__btn--city::before { 
+  background-color: #ff40a1;
+}
+
+.inside-page__btn--ski { 
+  border-color: #279eb2;
+  color: #279eb2;
+}
+
+.inside-page__btn--ski::before { 
+  background-color: #279eb2;
+}
+
+.inside-page__btn--beach { 
+  border-color: #fa7f67;
+  color: #fa7f67;
+}
+
+.inside-page__btn--beach::before { 
+  background-color: #fa7f67;
+}
+
+.inside-page__btn--camping { 
+  border-color: #00b97d;
+  color: #00b97d;
+}
+
+.inside-page__btn--camping::before { 
+  background-color: #00b97d;
+}
+
+
+
+/* Layout Structure=========================================*/
+
+.main {
+  background: linear-gradient(to bottom, #FDB0C0, #FDC8D0, #FDD0D8, #FED8E0, #FEE0E8, #FFE8F0);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Container to hold all cards in one place */
+.card-area {
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100%;
+  justify-content: space-evenly;
+  padding: 1rem;
+}
+
+/* Card ============================================*/
+
+/* Area to hold an individual card */
+.card-section {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+/* A container to hold the flip card and the inside page */
+.card {
+  background-color: rgba(0,0,0, .05);
+  box-shadow: -.1rem 1.7rem 6.6rem -3.2rem rgba(0,0,0,0.5);
+  height: 60rem;
+  position: relative;
+  transition: all 1s ease;
+  width: 50rem;
+}
+
+/* Flip card - covering both the front and inside front page */
+
+/* An outer container to hold the flip card. This excludes the inside page */
+.flip-card {
+  height: 60rem;
+  perspective: 100rem;
+  position: absolute;
+  right: 0;
+  transition: all 1s ease;
+  visibility: hidden;
+  width: 50rem;
+  z-index: 100;
+}
+
+/* The outer container's visibility is set to hidden. This is to make everything within the container NOT set to hidden  */
+/* This is done so content in the inside page can be selected */
+.flip-card > * {
+  visibility: visible;
+}
+
+/* An inner container to hold the flip card. This excludes the inside page */
+.flip-card__container {
+  height: 100%;
+  position: absolute;
+  right: 0;
+  transform-origin: left;
+  transform-style: preserve-3d;
+  transition: all 1s ease;
+  width: 100%;
+}
+
+.card-front,
+.card-back {
+  backface-visibility: hidden;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+/* Styling for the front side of the flip card */
+
+/* container for the front side */
+.card-front {
+  background-color: #fafbfa;
+  height: 60rem;
+  width: 50rem;
+}
+
+/* Front side's top section */
+.card-front__tp {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  padding: .75rem;
+}
+
+.card-front__tp--city {
+  background-image: url(./birthdayBg.jpg);
+    background-color: #cccccc;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card-front__tp--ski {
+  background: linear-gradient(
+    to bottom,
+    #47c2d7,
+    #279eb2
+  );
+}
+
+.card-front__tp--beach {
+  background: linear-gradient(
+    to bottom,
+    #fb9b88,
+    #f86647
+  );
+}
+
+.card-front__tp--camping {
+  background: linear-gradient(
+    to bottom,
+    #00db93,
+    #00b97d
+  );
+}
+
+/* Front card's bottom section */
+.card-front__bt {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+/* Styling for the back side of the flip card */
+
+.card-back {
+  background-color: #fafbfa;
+  transform: rotateY(180deg);
+}
+
+/* Specifically targeting the <video> element */
+.video__container {
+  clip-path: polygon(0% 0%, 100% 0%, 90% 50%, 100% 100%, 0% 100%);
+  height: auto;
+  min-height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* Inside page */
+
+.inside-page {
+  background-color: #fafbfa;
+  box-shadow: inset 20rem 0px 5rem -2.5rem rgba(0,0,0,0.25);
+  height: 100%;
+  padding: 5rem 3rem;
+  position: absolute;
+  right: 0;
+  transition: all 1s ease;
+  width: 50rem;
+  z-index: 1;
+}
+
+.inside-page__container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-align: center; 
+  width: 100%;
+}
+
+/* Functionality ====================================*/
+
+.card {
+  /* Existing styles */
+  transition: all 1s ease;
+}
+
+.card.clicked {
+  box-shadow: -.1rem 1.7rem 6.6rem -3.2rem rgba(0,0,0,0.75);
+  width: 90rem;
+}
+
+.card.clicked .flip-card__container {
+  transform: rotateY(-180deg);
+}
+
+.card.clicked .inside-page {
+  box-shadow: inset 1rem 0px 5rem -2.5rem rgba(0,0,0,0.1);
+}
+
+/* Figure ====================================*/
+
+.figure-01 {
+      width: 180px;
+    height: 200px;
+    position: absolute;
+    background-color: #eaeaea;
+    padding: 19px 19px 85px 19px;
+    border-radius: 1.1%;
+    animation: dahyunphoto 0.77s infinite;
+    top: 224px;
+    left: 45px;
+    transform: rotate(-10deg);
+        text-align: center;
+}
+
+.figure-02 {
+    width: 180px;
+    height: 200px;
+    position: absolute;
+    background-color: #eaeaea;
+    padding: 19px 19px 85px 19px;
+    border-radius: 1.1%;
+    animation: dahyunphoto 0.77s infinite;
+    top: 66px;
+    right: 59px;
+    transform: rotate(11deg);
+        text-align: center;
+}
+
+.figure-03 {
+    width: 180px;
+    height: 200px;
+    position: absolute;
+    background-color: #eaeaea;
+    padding: 19px 19px 85px 19px;
+    border-radius: 1.1%;
+    animation: dahyunphoto 0.77s infinite;
+    bottom: 82px;
+    right: 47px;
+    transform: rotate(-5deg);
+        text-align: center;
+}
+
+figure img {
+  width: 100%;
+}
+
+figure:before {
+  content: "";
+  position: absolute;
+  height: 21px;
+    width: 88px;
+  background-color: rgba(101, 55, 40, 0.3);
+}
+
+
+.figure-01:before {
+  top: 6px;
+  left: -25px;
+  transform: rotate(-40deg);
+}
+
+.figure-02:before {
+  top: 5px;
+  left: 116px;
+  transform: rotate(-142deg);
+}
+
+.figure-03:before {
+  top: -12px;
+  left: 44px;
+  transform: rotate(-180deg);
+}
+
+.gif-01{
+    width: 52%;
+    position: absolute;
+    top: 21px;
+    left: 13px;
+    transform: rotate(-7deg);
+}
+
+.gif-02{
+	width: 29%;
+    position: absolute;
+    bottom: 21px;
+    left: 92px;
+}
+
+.gif-03{
+	width: 26%;
+    position: absolute;
+    top: 14px;
+    right: -4px;
+    z-index: 9999;
+}
+
+.gif-04{
+	width: 49%;
+    position: absolute;
+    top: 197px;
+    right: 120px;
+    z-index: 10000;
+	transform: rotate(7deg);
+}
+
+.hr-theme-slash-2 {
+  display: flex;
+}
+.hr-theme-slash-2 .hr-line {
+  width: 100%;
+  position: relative;
+  margin: 15px;
+  border-bottom: 1px solid #ebeaea;
+}
+.hr-theme-slash-2 .hr-icon {
+  position: relative;
+  top: 3px;
+  color: #ff62b2;
+}
+
+
+#button-background {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.3);
+  width: 280px;
+  height: 53px;
+  border: white;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    bottom: 36px;
+    right: -74px;
+}
+
+#slider {
+  transition: width 0.3s, border-radius 0.3s, height 0.3s;
+  position: absolute;
+  left: -10px;
+  background-color: white;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    cursor: pointer;
+}
+#slider.unlocked {
+  transition: all 0.3s;
+  width: inherit;
+  left: 0 !important;
+  height: inherit;
+  border-radius: inherit;
+}
+
+.material-icons {
+  color: black;
+  font-size: 40px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.slide-text {
+  color: #3a3d55;
+  font-size: 17px;
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+  position:relative;
+    right:-20px;
+    
+}
+
+.bottom {
+  position: fixed;
+  bottom: 0;
+  font-size: 14px;
+  color: white;
+}
+.bottom a {
+  color: white;
+}
+
+
+#conTest {
+  width: 100%;
+    height: 20%;
+    position: absolute;
+    overflow: hidden;
+}
+
+#conTest2 {
+  width: 100%;
+    height: 20%;
+    position: absolute;
+    overflow: hidden;
+    top:20%;
+}
+
+#conTest3 {
+  width: 100%;
+    height: 20%;
+    position: absolute;
+    overflow: hidden;
+    top:40%;
+}
+
+#conTest4 {
+  width: 100%;
+    height: 20%;
+    position: absolute;
+    overflow: hidden;
+    top:60%;
+}
+
+#conTest5 {
+  width: 100%;
+    height: 20%;
+    position: absolute;
+    overflow: hidden;
+    top:80%;
+}
+.carousel .panel {
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+}
+
+
+/* CSS */
+.btnDesign {
+      background: #ff61b1;
+    margin-top:25px;
+    border-radius: 999px;
+    box-shadow: #ff61b1 0 10px 20px -10px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+}
+
+
+
+#imgBackground {
+    opacity: 0;
+    transition: opacity 4s ease-in-out;
+}
+
+#imgBackground.show {
+    opacity: 1;
+}
+
+
+
+
+
+
